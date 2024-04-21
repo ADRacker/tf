@@ -7,6 +7,9 @@ variable "web_port" {
 }
 
 resource "aws_instance" "server-ad-www" {
+    count         = 3
+
+
     ami           = "ami-026c8acd92718196b"
     instance_type = "t2.nano"
     tags = {
