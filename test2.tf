@@ -8,7 +8,7 @@ variable "web_port" {
 
 resource "aws_instance" "server-ad-www" {
     ami           = "ami-026c8acd92718196b"
-    instance_type = "t2.medium"
+    instance_type = "t2.nano"
     tags = {
         Name = "server-ad-www"
     }
