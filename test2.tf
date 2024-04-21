@@ -7,6 +7,9 @@ variable "web_port" {
 }
 
 resource "aws_instance" "server-ad-www" {
+    count         = 3
+
+
     ami           = "ami-026c8acd92718196b"
     instance_type = "t2.nano"
     tags = {
@@ -20,6 +23,18 @@ resource "aws_instance" "server-ad-www" {
     EOF
  
 }
+
+resource "aws_instance" "server-ad-db" {
+    count         = 2
+
+    ami           = "ami-026c8acd92718196b"
+    instance_type = "t2.nano"
+    tags = {
+        Name = "server-db-www"
+    }
+    vpc_security_group_ids = [aws_security_group.www-sg.id, aws_security_group.ssh-22.id]
+}
+
 
 resource "aws_security_group" "www-sg" {
     name        = "web-ad-${var.web_port}"
